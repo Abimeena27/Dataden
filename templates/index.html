@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataDen</title>
+    <link rel="stylesheet" href="../static/style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navbar">
+        <div class="navbar-icon">
+            <img src="../static/boxes.png" width="50px" height="auto"/>
+            <h4>DataDen</h4>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="/"><img src="../static/home-icon.png" width="30px" height="30px"></a></li>
+            <li>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="theme-icon" class="theme-icon">
+                        <img id="moon-icon" src="../static/crescent-moon.png" width="24px" height="24px" alt="Moon Icon">
+                        <img id="sun-icon" src="../static/sunny.png" width="24px" height="24px" alt="Sun Icon">
+                    </span>
+                </button>
+            </li>
+        </ul>
+    </div>   
+    <br/>
+    <!-- SideBar -->
+    <div class="bar">
+        <button class="sidebar-button" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
+        <br/>
+        <div class="sidebar" id="sidebar">
+            <div class="dropdown">
+                <button class="dropbtn"> + New</button>
+                <div class="dropdown-content">
+                  <a href="#" onclick="openNewFolder()"><img src="../static/new-folder.png" width="20px" height="20px"> New Folder</a>
+                  <a href="#" onclick="openFileUpload()"><img src="../static/file.png" width="20px" height="20px"> File Upload</a>
+                  <a href="#" onclick="openFolderUpload()"><img src="../static/folder.png" width="20px" height="20px"> Folder Upload</a>
+                </div>
+            </div> 
+            <br/>
+            <br/>
+            <br/>
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><i class="fa-solid fa-house-chimney" style="color: #241f31;"></i> Home</li>
+                <li class="sidebar-item"><i class="fa-solid fa-clock-rotate-left" style="color: #241f31;"></i> Recent </li>
+                <li class="sidebar-item"><i class="fa-solid fa-star" style="color: #241f31;"></i> Starred</li>
+            </ul>
+        </div>
+        <!-- Central Page -->
+        <div class="content">
+            <center>
+                <h2>Welcome to DataDen</h2>
+                <div class="search-container"> 
+                    <input type="text" placeholder="Search..." class="search-input">
+                    <button type="submit" class="search-button"><i class="fa-brands fa-searchengin" style="color: #ffffff;"></i></button>
+                </div>
+            </center>
+        </div>
+    </div>
+    <!-- Pop Up for New Folder -->
+    <div id="newFolderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeNewFolder()">&times;</span>
+            <h2>Create New Folder</h2>
+            <input type="text" id="folderNameInput" placeholder="Enter folder name" required/>
+            <br/>
+            <br/>
+            <button id="create-folder" onclick="createFolder()">Create</button>
+        </div>
+    </div>
+    <!-- Pop Up for Folder Upload -->
+    <div id="folderUploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFolderUpload()">&times;</span>
+            <h3>Upload Folder to S3</h3>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <label for="folderName">Folder Name:</label>
+                <input type="text" name="folderName" id="folderName" required>
+                <br><br>
+                <label for="files">Select Folder:</label>
+                <input type="file" name="files" id="files" webkitdirectory directory multiple required>
+                <br><br>
+                <button type="button" onclick="uploadFolder()">Upload</button>
+            </form>
+            <div id="response"></div>
+        </div>
+    </div>
+    <!-- Pop Up for File Upload -->
+    <div id="fileUploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFileUpload()">&times;</span>
+            <h3>Upload File</h3>
+            <form id="fileUploadForm" enctype="multipart/form-data">
+                <label for="file">Select File:</label>
+                <input type="file" name="file" id="file" required>
+                <br><br>
+                <button type="button" onclick="uploadFile()">Upload</button>
+            </form>
+            <div id="fileUploadResponse"></div>
+        </div>
+    </div>
+    <script src="../static/script.js"></script>
+</body>
+</html>
